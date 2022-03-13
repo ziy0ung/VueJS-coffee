@@ -8,10 +8,8 @@
             class="memo-form__title-form"
             placeholder="메모의 제목을 입력해주세요."
           />
-          <textarea
-            class="memo-form__content-form"
-            placeholder="메모의 내용을 입력해주세요."
-          ></textarea>
+          <textarea class="memo-form__content-form" placeholder="메모의 내용을 입력해주세요."/>
+          <button type="reset"><i class=""fas fa-sync-alt></button>
         </div>
       </fieldset>
     </form>
