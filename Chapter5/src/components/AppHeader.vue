@@ -1,6 +1,6 @@
 <template>
     <div class="app-header">
-        <h1>메모 애플리케이션</h1>
+        <h1>애플리케이션</h1>
     </div>
 </template>
 
