@@ -7,13 +7,20 @@
       <memo v-for="memo in memos"
             :key="memo.id"
             :memo="memo"
-            @deleteMemo="deleteMemo" />
+            @deleteMemo="deleteMemo"
+            @updateMemo="updateMemo" />
     </ul>
   </div>
 </template>
 <script>
 import MemoForm from "./MemoForm";
 import Memo from "./Memo";
+import axios from 'axios';
+import { mapActions, mapState } from 'vuex';
+
+const memoAPICore = axios.create({
+  baseURL: 'http://localhost:8000/api/memos'
+})
 
 export default {
   name: "MemoApp",
@@ -21,42 +28,53 @@ export default {
     MemoForm,
     Memo
   },
-  data() {
-    return {
-      memos: []
-    };
-  },
   created() {
-    this.memos = localStorage.memos ? JSON.parse(localStorage.memos) : [];
+    this.fetchMemos();
+  },
+  computed: {
+    ...mapState([
+      'memos'
+    ])
   },
   methods: {
+    // 메모가 추가되든 삭제되든 메모 개수가 변동된다면 change이벤트를 호출한다. 
+    addMemo () {
+      const { title, content } = this;
+      const isEmpty = title.length <= 0 || content.length <= 0;
+      if (isEmpty) {
+        return false;
+      }
+      this.$emit('addMemo', { title, content });
+      this.resetFields();
+    },
     updateMemo(payload){
-      // 수정된 메모를 저장한다.
       const { id, content } = payload;
       const targetIndex = this.memos.findIndex(v => v.id === id);
       const targetMemo = this.memos[targetIndex];
-      this.memos.splice(targetIndex, 1, { ...targetMemo, content });
-      this.storeMemo();
+      memoAPICore.put(`/${id}`, { content })
+        .then(() => {
+          this.memos.splice(targetIndex, 1, { ...targetMemo, content });
+        })
     },
     deleteMemo(id) {
-      // 자식 컴포넌트에서 인자로 전달해주는 id에 해당하는 메모 데이터의 인덱스를 찾는다.
       const targetIndex = this.memos.findIndex(v => v.id === id);
+      // 1. 삭제 대상과 일치하는 id 값을 delete 메소드와 함께 요청한다. 
+      memoAPICore.delete(`/${id}`)
+        .then(() => {
+          // 2. 요청 후, MemoApp 컴포넌트의 memos 데이터에서도 삭제한다. 
+          this.memos.splice(targetIndex, 1);
+        })
+
       // 찾은 인덱스 번호에 해당하는 메모 데이터를 삭제한다.
       this.memos.splice(targetIndex, 1);
-      // 삭제된 후의 데이터를 다시 로컬스토리지에 마찬가지로 저장한다.
-      this.storeMemo();
+      this.$emit('change', this.memos.length)
+
     },
-    addMemo (payload) {
-      // MemoForm에서 올려 받은 데이터를 먼저 컴포넌트 내부 데이터에 추가한다. 
-      this.memos.push(payload);
-      // 내부 데이터를 문자열로 변환 후, 로컬 스토리지에 저장한다. 
-      this.storeMemo();
-    },
-    storeMemo() {
-      const memosToString = JSON.stringify(this.memos);
-      localStorage.setItem('memos', memosToString);
-    }
-  
+    ...mapActions([
+      'fetchMemos',
+      'addMemo',
+      'deleteMemo'
+    ])
 
   }
 };

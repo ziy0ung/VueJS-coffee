@@ -30,15 +30,12 @@ export default {
     },
     addMemo() {
       const { title, content } = this;
-      const id = new Date().getTime();
-
       // 제목이나 내용을 입력하지 않은 경우를 대비하여 방어 코드를 추가한다.
       const isEmpty = title.length <= 0 || content.length <= 0;
       if (isEmpty) {
         return false;
       }
-
-      this.$emit('addMemo', { id, title, content });
+      this.$emit('addMemo', { title, content });
       this.resetFields();
     }
   }
