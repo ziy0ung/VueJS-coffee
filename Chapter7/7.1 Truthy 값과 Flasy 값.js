@@ -6,3 +6,4 @@ function isValid(string) {
 
 isValid('') // false
 isValid('valid text') // true
+

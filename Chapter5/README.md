@@ -24,27 +24,30 @@ App
 > > <br>
 
 ```
-├─Github
-│  │  README.md
-│  ├─docs
-│  │      01-git-설치.md
-│  │      02-github-회원가입.md
-│  └─images
-│          demun-001.jpg
-│          demun-002.jpg
-├─Javascript
-│  │  README.md
-│  ├─docs
-│  └─images
-└─Sublimetext
-   │  README.md
-   │  Sublime Text 3.zip
-   ├─docs
-   │      01-프로그램-설치.md
-   │      02-플러그인-설치.md
-   └─images
-           demun-024.jpg
-           demun-025.jpg
+├─Chapter5
+│  index.html
+│  package.json
+│  package-lock.json
+│  webpack.config.js
+│  .babelrc
+│  .editorconfig
+├─node_modules
+├─store
+└─src
+   │  App.vue
+   │  main.js
+   ├─components
+   │      AppHeader.vue
+   │      Memo.vue
+   │      MemoApp.vue
+   │      MemoForm.vue
+   ├─styles
+   │      reset.css
+   └─assets
+          logo.png
+
+
+
 ```
 
 #### 프로젝트 생성하기
