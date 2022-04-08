@@ -17,10 +17,10 @@ export default {
             type: Object,
             required: true,
             validator (post) {
-                const isValidPostId = typeof post.id === 'number'
-                const isValidTitle = !!post.title && post.title.length
-                const isValidContents = post.contents && post.contents.length
-                return isValidPostId && isValidTitle && isValidContents
+                const isValidPostId = typeof post.id === 'number';
+                const isValidTitle = !!post.title && post.title.length;
+                const isValidContents = post.contents && post.contents.length;
+                return isValidPostId && isValidTitle && isValidContents;
             }
         }
     }

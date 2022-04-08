@@ -1,51 +1,38 @@
 <template>
     <div class="post-view-page">
-        <post-view v-if="post" :post="post" />
-        <p v-else>게시글 불러오는 중...</p>
-        <router-link :to="{ name: 'PostListPage' }">목록</router-link>
+        <div class="post-view">
+            <post-view v-if="post" :post="post"/>
+            <p v-else>게시글 불러오는 중...</p>
+            <router-link :to="{ name: 'PostListPage' }">목록</router-link>
+        </div>
     </div>
-
-<!-- 
-    새로운 커밋
-    <div class="post-view-page">
-        <post-view v-if="post" :post="post" />
-        <p v-else>게시글 불러오는 중...</p>
-        <router-link :to="{ name: 'PostListPage' }">목록</router-link>
-    </div>    <div class="post-view-page">
-        <post-view v-if="post" :post="post" />
-        <p v-else>게시글 불러오는 중...</p>
-        <router-link :to="{ name: 'PostListPage' }">목록</router-link>
-    </div>    <div class="post-view-page">
-        <post-view v-if="post" :post="post" />
-        <p v-else>게시글 불러오는 중...</p>
-        <router-link :to="{ name: 'PostListPage' }">목록</router-link>
-    </div> -->
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import PostView from '@/components/PostView'
+import { mapState, mapActions } from 'vuex';
+import PostView from '@/components/PostView';
 
 export default {
     name: 'PostViewPage',
     components: { PostView },
     computed: {
         ...mapState([ 'post' ])
-    }, 
+    },
     methods: {
+        // fetchPost 함수를 mapActions 헬퍼 함수를 컴포넌트 메소드에 매핑한다.
         ...mapActions([ 'fetchPost' ])
     },
     props: {
         postId: {
-            type: String,
+            type: String, 
             required: true
         }
     },
     created () {
         this.fetchPost(`/${this.postId}`)
             .catch(err => {
-                alert(err.response.data.msg)
-                this.$router.back()
+                alert(err.response.data.msg);
+                this.$router.back();
             })
     }
 }

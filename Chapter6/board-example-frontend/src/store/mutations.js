@@ -1,27 +1,12 @@
-import { FETCH_POST_LIST } from './mutations-types'
-import { FETCH_POST } from './mutations-types'
-import { SET_ACCESS_TOKEN } from './mutations-types'
-import { SET_MY_INFO } from './mutations-types'
-import api from '@/api'
-import Cookies from 'js-cookie'
+// mutations.js : 우리가 추가한 스토어의 값을 변경할 수 있는 변이(mutations)
+
+import { FETCH_POST_LIST, FETCH_POST } from './mutations-types';
 
 export default {
     [FETCH_POST_LIST] (state, posts) {
-        state.posts = posts
+        state.posts = posts;
     },
     [FETCH_POST](state, post) {
-        state.post = post
-    },
-    [SET_ACCESS_TOKEN](state, accessToken) {
-        if (accessToken) {
-            state.accessToken = accessToken;
-            api.defaults.headers.common.Authorization = `Bearer${accessToken}`;
-            Cookies.set('accessToken', accessToken)
-        }
-    },
-    [SET_MY_INFO](state, me) {
-        if (me) {
-            state.me = me
-        }
+        state.post = post;
     }
 }

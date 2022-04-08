@@ -13,8 +13,8 @@
 </template>
 <script>
 export default {
-    name: 'SignForm',
-    data () {
+    name: 'SigninForm',
+    data() {
         return {
             email: '',
             password: ''
@@ -22,8 +22,8 @@ export default {
     },
     methods: {
         submit () {
-            const { email, password } = this
-            this.$emit('submit', { email, password })
+            const { email, password } = this;
+            this.$emit('submit', { email, password });
         }
     }
 }

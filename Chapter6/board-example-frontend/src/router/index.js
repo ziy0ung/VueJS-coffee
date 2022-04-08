@@ -19,26 +19,19 @@ export default new Router({
     {
       path: '/post/:postId',
       name: 'PostViewPage',
-      components: {
-        header: AppHeader,
-        default: PostViewPage,
-      },
-      props: {
-        default: true
-      }
+      component: PostViewPage,
+      props: true
     },
     {
       path: '/signup',
       name: 'Signup',
-      components: {
-        header: AppHeader,
-        default: Signup
-      }
+      component: Signup
     },
     {
       path: '/signin',
       name: 'Signin',
       component: Signin
     }
+
   ]
 })
