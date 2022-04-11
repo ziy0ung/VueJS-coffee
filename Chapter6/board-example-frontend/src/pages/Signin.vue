@@ -18,9 +18,9 @@ export default {
     methods: {
         onSubmit (payload) {
             const { email, password } = payload;
-            api.post('/auth/signin', { email, password })
+            api.post('/auto/signin', {email, password})
                 .then(res => {
-                    console.log(res.data);
+                    console.log(res.data.accessToekn)
                 })
         }
     },
