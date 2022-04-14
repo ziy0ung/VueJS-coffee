@@ -1,5 +1,5 @@
-// export default {
-//     isAuthorized(state) {
-//         return state.accessToken.legnth > 0 && !!state.me;
-//     }
-// }
+export default {
+  isAuthorized (state) {
+    return state.accessToken.length > 0 && !!state.me
+  }
+}
