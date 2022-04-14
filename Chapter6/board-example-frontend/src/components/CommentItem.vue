@@ -43,6 +43,9 @@ export default {
         },
         editButtonText () {
             return this.isEditing ? '수정 취소' : '수정';
+        },
+        isValidComment () {
+            return t
         }
     },
     methods: {
