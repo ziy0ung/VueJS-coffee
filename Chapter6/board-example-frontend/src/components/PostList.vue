@@ -2,10 +2,10 @@
     <div>
         <table>
             <colgroup>
-                <col style="width: 10%;" />
-                <col style="width: 60%;" />
-                <col style="width: 10%;" />
-                <col style="width: 20%;" />
+                <col style="width: 10%;">
+                <col style="width: 60%;">
+                <col style="width: 10%;">
+                <col style="width: 20%;">
             </colgroup>
             <thead>
                 <tr>
@@ -19,9 +19,7 @@
                 <tr v-for="post in posts" :key="post.id">
                     <td scope="col">{{ post.id }}</td>
                     <td scope="col">
-                        <router-link :to="{ name: 'PostViewPage', params: { postId: post.id.toString() } }">
-                            {{ post.title }}
-                        </router-link>
+                        <router-link :to="{ name: 'PostViewPage', params: { postId: post.id.toString() } }">{{ post.title }}</router-link>
                         [{{ post.comments.length }}]
                     </td>
                     <td scope="col">{{ post.user.name }}</td>

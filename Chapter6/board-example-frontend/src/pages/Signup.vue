@@ -1,13 +1,13 @@
 <template>
     <div class="sign-up-page">
         <h3>회원가입</h3>
-        <signup-form @submit="onSubmit" />
+        <signup-form @submit="onSubmit"/>
         <p>이미 가입하셨나요? <router-link :to="{ name: 'Signin' }">로그인하러 가기</router-link></p>
     </div>
 </template>
 
 <script>
-import SignupForm from '@/components/SignupForm';
+import SignupForm from '@/components/SignupForm'
 import api from '@/api'
 
 export default {
@@ -22,10 +22,8 @@ export default {
                     this.$router.push({ name: 'Signin' });
                 })
                 .catch(err => {
-                    alert(err.response.data.msg);
+                    alert(err.response.data.msg)
                 })
-            
-
         }
     }
 }
