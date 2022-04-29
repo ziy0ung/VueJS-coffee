@@ -1,0 +1,97 @@
+<template>
+    <div class="memo-form">
+        <form @submit.prevent="addMemo">
+            <fieldset>
+                <div>
+                    <input class="memo-form__title-form"
+                           type="text"
+                           v-model="title"
+                           placeholder="메모의 제목을 입력해주세요." />
+                    <textarea class="memo-form__content-form"
+                              v-model="content"
+                              placeholder="메모의 내용을 입력해주세요." />
+                    <button type="reset"><i class="fas fa-sync-alt"></i></button>
+                </div>
+                <button type="submit">등록하기</button>
+            </fieldset>
+        </form>
+    </div>
+</template>
+
+<script>
+import { isMemoSame } from '@vue/runtime-core';
+export default {
+    name: "MemoForm",
+    data () {
+        return {
+            title: '',
+            content: ''
+        }
+    },
+    methods: {
+        resetFields () {
+            this.title = '';
+            this.content = '';
+        },
+        addMemo () {
+            // 비구조화 할당(destructuring assignment)
+            // : 객체의 속성을 해제하여 그 값을 각각의 변수에 담을 수 있도록 하는 자바스크립트의 표현식 문법
+            const { title, content } = this;
+            const id = new Date().getTime();
+
+            const isEmpty = title.length <= 0 || content.length <= 0;
+            if (isEmpty) {
+                return false;
+            }
+            this.$emit('addMemo', { id, title, content });
+            this.resetFields();
+        }
+    }
+}
+</script>
+<style scoped>
+.memo-form{
+    margin-bottom: 24px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #eee;
+}
+.memo-form form fieldset div {
+    position: relative;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+}
+.memo-form form fieldset div button[type="reset"] {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 16px;
+    background: none;
+}
+.memo-form form fieldset button[type="submit"] {
+    float: right;
+    width: 96px;
+    padding: 12px 0;
+    border-radius: 4px;
+    background-color: #5e75c1;
+    color: #fff;
+    font-size: 14px;
+}
+.memo-form form fieldset .memo-form__title-form {
+    width: 100%;
+    margin-bottom: 12px;
+    font-size: 16px;
+    line-height: 26px;
+}
+.memo-form form fieldset .memo-form__content-form {
+    width: 100%;
+    height: 66px;
+    font-size: 14px;
+    line-height: 22px;
+    vertical-align: top;
+}
+.memo-form input:focus{
+    outline: none;
+}
+</style>

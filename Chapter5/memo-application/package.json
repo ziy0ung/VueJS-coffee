@@ -2,7 +2,7 @@
   "name": "memo-application",
   "description": "A Vue.js project",
   "version": "1.0.0",
-  "author": "ziy0ung <xoxopjy@gmail.com>",
+  "author": "jiyoung <xoxopjy@gmail.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -10,9 +10,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "axios": "^0.26.1",
-    "vue": "^2.5.11",
-    "vuex": "^4.0.2"
+    "vue": "^2.5.11"
   },
   "browserslist": [
     "> 1%",
