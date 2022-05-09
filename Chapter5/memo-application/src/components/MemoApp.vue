@@ -1,10 +1,9 @@
 <template>
     <div class="memo-app">
         <memo-form @addMemo="addMemo" />
-        <ul class="memo-">
+        <ul class="memo-list">
             <memo v-for="memo in memos"
-                  :key="memo.id"
-                  :memo="memo" />
+                :
         </ul>
     </div>
 </template>
